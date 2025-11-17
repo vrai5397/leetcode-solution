@@ -1,18 +1,13 @@
 class Solution {
 public:
-    int mod = 1e9 + 7;
-
+int mod=1e9+7;
     int numSub(string s) {
-        long long count = 0;   // must be long long
-        int n = s.size();
-
-        for (int i = 0; i < n; ) {
-            if (s[i] == '0') {
-                i++;
-                continue;
-            }
-
-            long long j = i;
+        // for consecutive one contribution is (n+1)*n/2
+        int i=0;
+        int n=s.size();
+        int count=0;
+        while(i<n){
+    long long j = i;
             while (j < n && s[j] == '1') j++;
 
             long long ones = j - i;
@@ -22,9 +17,8 @@ public:
 
             count = (count + contrib) % mod;
 
-            i = j;  // go to first zero
+            i = j+1;  // go to first zero
         }
-
-        return (int)count;
+        return count;
     }
 };

@@ -29,7 +29,7 @@ public:
             auto [d, node] = pq.top();
             pq.pop();
 
-            if (d > dist[node]) continue;
+            // if (d > dist[node]) continue;
 
             for (auto &p : adj[node]) {
                 int nxt = p.first;

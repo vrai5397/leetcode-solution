@@ -9,6 +9,9 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+
+        // brute force------------>
+
         set<ListNode*> st;
         ListNode* temp=headA;
         while(temp!=NULL){
@@ -19,7 +22,7 @@ temp=headB;
           while(temp!=NULL){
             if(st.find(temp)!=st.end())// found in set
             return temp;
-            st.insert(temp);
+       
             temp=temp->next;
         }
   return NULL;

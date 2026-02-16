@@ -1,24 +1,20 @@
 class Solution {
 public:
-    unsigned int reverseBits(unsigned int n) {
-        vector<int> arr(32, 0);
-        
-        int i = 0;
-        
-        // Fill 32 bits
-        while (i < 32) {
-            arr[i] = n % 2;   // take last bit
-            n = n / 2;        // remove last bit
-            i++;
-        }
-
-        unsigned int num = 0;
-
-        // Build reversed number
-        for (int i = 0; i < 32; i++) {
-            num = num * 2 + arr[i];
-        }
-
-        return num;
+    int reverseBits(int n) {
+        vector<int> arr(32,0);
+       
+    int i=0;
+    while(n!=0){
+       
+        int r=n%2;
+        arr[i]=r;
+        i++;
+        n=n/2;
+    }
+unsigned int num=0;
+  for(int i=0;i<arr.size();i++){
+     num=num*2+arr[i];
+  }
+  return num; 
     }
 };

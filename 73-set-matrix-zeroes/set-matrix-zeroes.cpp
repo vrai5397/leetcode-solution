@@ -12,7 +12,7 @@ void setzero(vector<vector<int>>& matrix,int i,int j){
     }
 }
     void setZeroes(vector<vector<int>>& matrix) {
-        map<int,pair<int,int>> mp;
+        unordered_map<int,pair<int,int>> mp;
         int r=matrix.size();
         int c=matrix[0].size();
         int x=0;

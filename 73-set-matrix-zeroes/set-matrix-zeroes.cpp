@@ -1,31 +1,59 @@
 class Solution {
 public:
-void setzero(vector<vector<int>>& matrix,int i,int j){
- 
-     int r=matrix.size();
-    int c=matrix[0].size();
-    for(int k=0;k<c;k++){
-        matrix[i][k]=0;
-    }
-     for(int k=0;k<r;k++){
-        matrix[k][j]=0;
-    }
-}
     void setZeroes(vector<vector<int>>& matrix) {
-        unordered_map<int,pair<int,int>> mp;
-        int r=matrix.size();
-        int c=matrix[0].size();
-        int x=0;
-        for(int i=0;i<r;i++){
-            for(int j=0;j<c;j++){
-                if(matrix[i][j]==0){
-          mp.insert(make_pair(x, make_pair(i, j)));
-          x++;
+        int r = matrix.size();
+        int c = matrix[0].size();
+
+        bool firstRow = false;
+        bool firstCol = false;
+
+        // Check first column
+        for (int i = 0; i < r; i++) {
+            if (matrix[i][0] == 0) {
+                firstCol = true;
+                break;
+            }
+        }
+
+        // Check first row
+        for (int j = 0; j < c; j++) {
+            if (matrix[0][j] == 0) {
+                firstRow = true;
+                break;
+            }
+        }
+
+        // Mark rows and columns
+        for (int i = 1; i < r; i++) {
+            for (int j = 1; j < c; j++) {
+                if (matrix[i][j] == 0) {
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
                 }
             }
         }
-        for(auto x:mp){
-          setzero(matrix,x.second.first,x.second.second);
+
+        // Set zeroes using markers
+        for (int i = 1; i < r; i++) {
+            for (int j = 1; j < c; j++) {
+                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        // Set first row to zero
+        if (firstRow) {
+            for (int j = 0; j < c; j++) {
+                matrix[0][j] = 0;
+            }
+        }
+
+        // Set first column to zero
+        if (firstCol) {
+            for (int i = 0; i < r; i++) {
+                matrix[i][0] = 0;
+            }
         }
     }
 };

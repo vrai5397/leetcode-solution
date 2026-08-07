@@ -1,24 +1,21 @@
 class Solution {
 public:
     bool isPalindrome(string s) {
-        // check for valid palindrome
-        // check for uppercase
-        string st="";
-        for(int i=0;i<s.size();i++){
-             char ch=s[i];
-             if(isupper(ch)){
-                ch=tolower(ch);
-             }
-             if(isalnum(ch))
-             st+=ch;
-        }
-        int i=0;
-        int j=st.size()-1;
-        while(i<j){
-            if(st[i]!=st[j]) return false;
-            i++;
-            j--;
-        }
-        return true;
+        // simple approach
+        string ans="";
+      for(int i=0;i<s.size();i++){
+         if(isalnum(s[i])){
+             ans+=tolower(s[i]);
+         }
+      }
+      int i=0;
+      int j=ans.size()-1;
+      cout<<ans;
+      while(i<j){
+         if(ans[i]!=ans[j]) return false;
+         i++;
+         j--;
+      }
+      return true;
     }
 };

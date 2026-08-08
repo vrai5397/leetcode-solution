@@ -15,7 +15,7 @@ bool isvowel(char ch){
      while(j<s.size()){
         if(isvowel(s[j]))
         count++;
-        while(j-i+1>k){
+        if(j-i+1>k){
             if(isvowel(s[i]))
             count--;
             i++;

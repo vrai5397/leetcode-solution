@@ -7,7 +7,7 @@ public:
         double maxavg=-1e9;
         while(j<nums.size()){
              sum+=nums[j];
-             while(j-i+1>k){
+             if(j-i+1>k){
                 sum-=nums[i];
                 i++;
              }

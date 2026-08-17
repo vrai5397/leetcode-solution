@@ -1,59 +1,24 @@
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
-        int r = matrix.size();
-        int c = matrix[0].size();
-
-        bool firstRow = false;
-        bool firstCol = false;
-
-        // Check first column
-        for (int i = 0; i < r; i++) {
-            if (matrix[i][0] == 0) {
-                firstCol = true;
-                break;
-            }
-        }
-
-        // Check first row
-        for (int j = 0; j < c; j++) {
-            if (matrix[0][j] == 0) {
-                firstRow = true;
-                break;
-            }
-        }
-
-        // Mark rows and columns
-        for (int i = 1; i < r; i++) {
-            for (int j = 1; j < c; j++) {
-                if (matrix[i][j] == 0) {
-                    matrix[i][0] = 0;
-                    matrix[0][j] = 0;
+        // we can store which row and cloumn has zero
+        unordered_set<int>row;
+        unordered_set<int> col;
+        for(int i=0;i<matrix.size();i++){
+            for(int j=0;j<matrix[0].size();j++){
+                if(matrix[i][j]==0){
+                    row.insert(i);
+                    col.insert(j);
                 }
+                
             }
         }
-
-        // Set zeroes using markers
-        for (int i = 1; i < r; i++) {
-            for (int j = 1; j < c; j++) {
-                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
-                    matrix[i][j] = 0;
-                }
+for(int i=0;i<matrix.size();i++){
+     for(int j=0;j<matrix[0].size();j++){
+             if(row.count(i)||col.count(j))
+              matrix[i][j]=0; 
             }
         }
-
-        // Set first row to zero
-        if (firstRow) {
-            for (int j = 0; j < c; j++) {
-                matrix[0][j] = 0;
-            }
-        }
-
-        // Set first column to zero
-        if (firstCol) {
-            for (int i = 0; i < r; i++) {
-                matrix[i][0] = 0;
-            }
-        }
+        
     }
 };

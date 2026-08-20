@@ -1,25 +1,31 @@
 class Solution {
 public:
-void reverse(string& st,int i,int j){
-    while(i<j){
-        swap(st[i],st[j]);
-        i++;
-        j--;
-    }
-}
     bool rotateString(string s, string goal) {
-        // brute force
-        int n=s.size();
-        for(int i=1;i<=s.size();i++){
-            string helper=s;
-            reverse(helper,0,helper.size()-1);
-            reverse(helper,0,n-1-i);
-            reverse(helper,n-i,n-1);
-            cout<<helper<<endl;
-            if(helper==goal)
+        if(s.size()!=goal.size())
+        return false;
+        string ans=s;
+        ans+=s;
+        int j=0;
+        int i=0;
+     
+      while(i<ans.size()){
+        if(ans[i]==goal[j]){
+            // we have to check
+              int p=i;
+            for(int k=j;k<goal.size();k++){
+
+              
+                if(ans[p]!=goal[k])
+                break;
+
+          else if(k==goal.size()-1&&ans[p]==goal[k])
             return true;
 
+        p++;
+            }
         }
-        return false;
+        i++;
+      }
+      return false;
     }
 };

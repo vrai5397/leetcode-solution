@@ -7,7 +7,7 @@ public:
 
         int i = 0;
 
-        while (i < s.size() && s[i] == ' ')
+        while ( s[i] == ' ')
             i++;
 
         string st = s.substr(i, s.size());

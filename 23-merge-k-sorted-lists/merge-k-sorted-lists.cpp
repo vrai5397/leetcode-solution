@@ -18,18 +18,19 @@ public:
             if(lists[i]!=NULL)
             pq.push({lists[i]->val,lists[i]});
         }
-           ListNode* dummy=new ListNode(-1);
-           ListNode* temp=dummy;
-            while(!pq.empty()){
-                auto x=pq.top();
-                pq.pop();
-                temp->next=x.second;
-               if(x.second->next != NULL) {
-                pq.push({x.second->next->val, x.second->next});
-            }
-temp=temp->next;
-            }
-        
-        return dummy->next;
+          // we have to make dummy
+          ListNode* dummy=new ListNode(-1);
+          ListNode* temp=dummy;
+          while(!pq.empty()){
+             // pq is not empty
+             auto x=pq.top();
+             pq.pop();
+             // coonect in dummy
+             temp->next=x.second;
+             temp=temp->next;
+             if(x.second->next!=NULL)
+             pq.push({x.second->next->val,x.second->next});
+          }
+          return dummy->next;
     }
 };

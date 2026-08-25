@@ -9,7 +9,7 @@ public:
             return mid;
             else if(nums[mid]>target)
             hi=mid-1;
-            else 
+            else
             lo=mid+1;
         }
         return -1;

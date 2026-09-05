@@ -17,11 +17,8 @@ bool present(vector<int>& arr,int target){
     int findKthPositive(vector<int>& arr, int k) {
        
        int lo=1;
-        int hi=INT_MIN;
-        for(auto x:arr)
-        hi=max(hi,x);
-
-        hi+=k;
+        int hi=arr[arr.size()-1]+k;
+        
          int p=0;
         for(int i=lo;i<=hi;i++){
             

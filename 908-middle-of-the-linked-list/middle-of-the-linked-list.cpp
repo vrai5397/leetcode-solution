@@ -11,20 +11,12 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-        // brute force calculate the length
-        int len=0;
-        ListNode* temp=head;
-        while(temp){
-          len++;
-          temp=temp->next;
-          
-        }
-int target=len/2+1;
-ListNode* temp2=head;
-for(int i=1;i<target;i++){
-     
-     temp2=temp2->next;
-}
-return temp2;
+         ListNode* slow=head;
+         ListNode* fast=head;
+         while(fast!=NULL&& fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+         }
+         return slow;
     }
 };

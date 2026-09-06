@@ -1,39 +1,63 @@
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        // median of two sorted array
-        int i=0;
-        int j=0;
-        vector<int> ans;
-        while(i<nums1.size()&&j<nums2.size()){
-            if(nums1[i]<=nums2[j]){
-                ans.push_back(nums1[i]);
-                i++;
+
+        int m = nums1.size();
+        int n = nums2.size();
+
+        // Binary search on smaller array
+        if (m > n)
+            return findMedianSortedArrays(nums2, nums1);
+
+        int lo = 0;
+        int hi = m;
+
+        int left = (m + n + 1) / 2;
+
+        while (lo <= hi) {
+
+            int mid1 = lo + (hi - lo) / 2;
+            int mid2 = left - mid1;
+
+            int l1 = INT_MIN;
+            int l2 = INT_MIN;
+            int r1 = INT_MAX;
+            int r2 = INT_MAX;
+
+            if (mid1 < m)
+                r1 = nums1[mid1];
+
+            if (mid2 < n)
+                r2 = nums2[mid2];
+
+            if (mid1 - 1 >= 0)
+                l1 = nums1[mid1 - 1];
+
+            if (mid2 - 1 >= 0)
+                l2 = nums2[mid2 - 1];
+
+            // Correct partition
+            if (l1 <= r2 && l2 <= r1) {
+
+                // Odd total length
+                if ((m + n) % 2 != 0)
+                    return max(l1, l2);
+
+                // Even total length
+                return (max(l1, l2) + min(r1, r2)) / 2.0;
             }
-            else{
-                ans.push_back(nums2[j]);
-                j++;
+
+            // Partition is too far right in nums1
+            else if (l1 > r2) {
+                hi = mid1 - 1;
+            }
+
+            // Partition is too far left in nums1
+            else {
+                lo = mid1 + 1;
             }
         }
-        while(i<nums1.size()){
-            ans.push_back(nums1[i]);
-            i++;
-        }
-          while(j<nums2.size()){
-            ans.push_back(nums2[j]);
-            j++;
-        }
-      double median=0;
-      if(ans.size()%2==0){
-         // is even
-         int x1=ans.size()/2;
-         median=(ans[x1]+ans[x1-1])/2.0;
-      }
-      else{
-        // is even
-         int x1=ans.size()/2;
-         median=ans[x1];
-      }
-      return median;
+
+        return 0.0;
     }
 };

@@ -1,25 +1,20 @@
 class Solution {
 public:
     bool judgeCircle(string moves) {
-        int i=0;
-        int j=0;
+        int right=0;
+        int up=0;
         for(auto x:moves){
-             if(x=='U')
-                i=i-1;
-             
-             else if(x=='D')
-             i=i+1;
-             else if(x=='L')
-             j=j-1;
-
-             else
-             j=j+1;
-              
-              
+            if(x=='R')
+            right++;
+            else if(x=='U')
+            up++;
+            else if(x=='L')
+            right--;
+            else 
+            up--;
         }
-        if(i==0&&j==0)
+        if(up==0&&right==0)
         return true;
-        else
         return false;
     }
 };

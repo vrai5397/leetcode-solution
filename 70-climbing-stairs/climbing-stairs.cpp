@@ -1,18 +1,16 @@
 class Solution {
 public:
-int solve(vector<int>& dp,int n){
-    // base case
-       if(n==0)
-         return dp[0]= 1;
-         if(n==1)
-         return dp[1]=1;
-         if(dp[n]!=-1)
-         return dp[n];
-        return dp[n]=solve(dp,n-1)+solve(dp,n-2);
-}
+ int climbStairss(int n,vector<int>& dp) {
+        if(n==0||n==1)
+        return 1;
+        if(dp[n]!=-1)
+        return dp[n];
+       int method1=climbStairss(n-1,dp);
+       int method2=climbStairss(n-2,dp);
+       return dp[n]=method1+method2; 
+    }
     int climbStairs(int n) {
-        // total ways
        vector<int> dp(n+1,-1);
-       return solve(dp,n);
+       return climbStairss(n,dp);
     }
 };

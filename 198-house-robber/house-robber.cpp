@@ -1,20 +1,28 @@
 class Solution {
 public:
-int solve(vector<int>& nums,int i,vector<int>& dp){
+int solve(vector<int>& nums,int i){
     // base case
+    if(i<0)
+    return 0;
     if(i==0)
-    return dp[i]=nums[i];
-    if(i<0) return 0;
-    if(dp[i]!=-1)
-    return dp[i];
-    int exclude=solve(nums,i-1,dp);
-    int include=nums[i]+solve(nums,i-2,dp);
-
-    return dp[i]=max(exclude,include);
+    return nums[0];
+    int exclude=solve(nums,i-1);
+    int include=nums[i]+solve(nums,i-2);
+    return max(include,exclude);
 }
     int rob(vector<int>& nums) {
-        // we will follow pick and not pick strategy
-        vector<int> dp(nums.size(),-1);
-        return solve(nums,nums.size()-1,dp);
+        // we cannot robb two adjacent house
+      // n-1 to 0
+      if(nums.size()==1)
+      return nums[0];
+      vector<int> dp(nums.size(),0);
+      dp[0]=nums[0];
+      dp[1]=max(nums[0],nums[1]);
+      for(int i=2;i<nums.size();i++){
+         int exclude=dp[i-1];
+    int include=nums[i]+dp[i-2];
+           dp[i]= max(include,exclude);
+      }
+      return dp[nums.size()-1];
     }
 };

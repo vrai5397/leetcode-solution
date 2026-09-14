@@ -1,57 +1,46 @@
 class Solution {
 public:
- class DisjointSet {
-    public:
-        vector<int> parent, size;
+void bfs(vector<vector<int>>& adj,int node,vector<int>
+& visited){
+   queue<int> q;
+   q.push(node);
+   visited[node]=1;
+   while(!q.empty()){
+       int currnode=q.front();
+       q.pop();
+       for(auto x:adj[currnode]){
+           if(!visited[x]){
+            visited[x]=1;
+           q.push(x);
+           }
+       }
+   }
 
-        DisjointSet(int n) {
-            parent.resize(n + 1);
-            size.resize(n + 1, 1);
-            for(int i = 1; i <= n; i++)
-                parent[i] = i;
-        }
-
-        int FindUPar(int node) {
-            if(node == parent[node]) return node;
-            return parent[node] = FindUPar(parent[node]);
-        }
-
-        void UnionBySize(int u, int v) {
-            int pu = FindUPar(u);
-            int pv = FindUPar(v);
-            if(pu == pv) return;
-
-            if(size[pu] < size[pv]) {
-                parent[pu] = pv;
-                size[pv] += size[pu];
-            } else {
-                parent[pv] = pu;
-                size[pu] += size[pv];
-            }
-        }
-    };
-
-
+}
     int findCircleNum(vector<vector<int>>& isConnected) {
-        int n=isConnected.size();
-        int m=isConnected[0].size();
-
-        DisjointSet ds(n);
-
+        // 1 1 0   // 1 2 
+        // 1 1 0
+        // 0 0 1
+         int n=isConnected.size();
+        vector<vector<int>> adj(n);
         for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(isConnected[i][j]==1)
-                 ds.UnionBySize(i+1,j+1);
-                 
+            for(int j=0;j<n;j++){
+                int u=i;
+                int v=j;
+                if(isConnected[i][j]==1){
+                adj[i].push_back(j);
+                adj[j].push_back(i);
+                }
             }
         }
-
+        vector<int> visited(n,0);
         int count=0;
-        for(int i=1;i<=n;i++){
-            if(ds.FindUPar(i)==i)
-             count++;
-        }
-
-        return count;
+       for(int i=0;i<n;i++){
+          if(!visited[i]){
+              count++;
+              bfs(adj,i,visited);
+          }
+       } 
+       return count;
     }
 };

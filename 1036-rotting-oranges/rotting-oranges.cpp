@@ -39,14 +39,7 @@ int dr[4]={-1,0,1,0};
            
         }
         // 1 minute done
-        if(prevtime==-1){
-        count=time;
-         prevtime=time;
-        }
-        else if(time!=prevtime){
-        count=time;
-        prevtime=time;
-        }
+      count=max(count,time);
     }
 
         for(int i=0;i<m;i++){

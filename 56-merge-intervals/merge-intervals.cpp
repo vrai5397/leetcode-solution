@@ -1,21 +1,16 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        // sort
-        sort(intervals.begin(),intervals.end());
-        vector<vector<int>> ans;
-        for(auto interval:intervals){
-            if(ans.empty())
-            ans.push_back({interval[0],interval[1]});
-         else  if(ans.back()[1]>=interval[0]){
-            // overlapping interval
-             int maxi=max(interval[1],ans.back()[1]);
-             ans.back()[1]=maxi;
+       sort(intervals.begin(),intervals.end());
+       vector<vector<int>> ans;
+       ans.push_back(intervals[0]);
+       for(int i=1;i<intervals.size();i++){
+           if(intervals[i][0]<=ans.back()[1]){
+               ans.back()[1]=max(ans.back()[1],intervals[i][1]);
            }
-           else{
-             ans.push_back({interval[0],interval[1]});
-           }
-        }
-        return ans;
+           else 
+           ans.push_back({intervals[i][0],intervals[i][1]});
+       }
+return ans;
     }
 };

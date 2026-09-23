@@ -1,37 +1,34 @@
 class Solution {
 public:
     int compress(vector<char>& chars) {
-      int i=0;
-      int j=i;
-      string st="";
-      int count=0;
-      while(j<chars.size()){
-        if(chars[i]!=chars[j]){
-             // group has been ended
-             int count=j-i;
-             if(count==1) st+=chars[i];
-             else{
-                st+=chars[i];
-                st+=to_string(count);
-             }
-             i=j;
-        }
-        else{
+        int i=0;
+        int j=0;
+        string ans="";
+        while(j<chars.size()){
+            if(chars[i]==chars[j])
             j++;
-        }
-      }
-
-      count=j-i;
-        if(count==1) st+=chars[i];
+            else{
+               if(j-i==1){
+                  ans+=chars[i];
+                  i=j;
+               }
              else{
-                st+=chars[i];
-                st+=to_string(count);
+                ans+=chars[i];
+                ans+=to_string(j-i);
+                i=j;
              }
-
-      
-      for(int i=0;i<st.size();i++){
-          chars[i]=st[i];
-      }
-      return st.size();
+               
+               
+            }
+        }
+        if(j-i==1)
+        ans+=chars[i];
+        else{
+        ans+=chars[i];
+        ans+=to_string(j-i);
+        }
+    for(int i=0;i<ans.size();i++)
+    chars[i]=ans[i];
+        return ans.size();
     }
 };

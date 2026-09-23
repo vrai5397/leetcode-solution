@@ -1,28 +1,25 @@
 class Solution {
 public:
-    int maxScore(vector<int>& nums, int k) {
-      
-      // we have to find subarray of size n-k with minsum
-      int totalsum=0;
-       for(int i=0;i<nums.size();i++)
-       totalsum+=nums[i];
-       int i=0;
-       int j=0;
-       int n=nums.size();
-       int sum=0;
-       int minsum=1e9;
-       
-      
-       while(j<nums.size()){
-           sum+=nums[j];
-           while(j-i+1>n-k){
-              sum-=nums[i];
-              i++;
+    int maxScore(vector<int>& arr, int k) {
+        int totalsum=0;
+        for(auto x:arr){
+            totalsum+=x;
+        }
+        int k1=arr.size()-k;
+        int i=0;
+        int j=0;
+        int sum=0;
+        int minsum=INT_MAX;
+        while(j<arr.size()){
+           sum+=arr[j];
+           while(j-i+1>k1){
+             sum-=arr[i];
+             i++;
            }
-           if(j-i+1==n-k)
+           if(j-i+1==k1)
            minsum=min(minsum,sum);
            j++;
-       }
-       return totalsum-minsum;
+        }
+        return totalsum-minsum;
     }
 };

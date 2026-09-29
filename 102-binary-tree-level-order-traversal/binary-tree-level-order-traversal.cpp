@@ -18,18 +18,19 @@ public:
         q.push(root);
         vector<vector<int>> ans;
         while(!q.empty()){
-            int size=q.size();
-            vector<int> helper;
-            for(int i=0;i<size;i++){
-                auto x=q.front();
-                q.pop();
-                helper.push_back(x->val);
-                if(x->left)
-                q.push(x->left);
-                if(x->right)
-                q.push(x->right);
-            }
-            ans.push_back(helper);
+           int size=q.size();
+           vector<int> helper;
+           for(int i=0;i<size;i++){
+
+              auto x=q.front();
+              q.pop();
+              helper.push_back(x->val);
+              if(x->left)
+              q.push(x->left);
+              if(x->right)
+              q.push(x->right);
+           }
+           ans.push_back(helper);
         }
         return ans;
     }
